@@ -1,5 +1,8 @@
 package com.reacitvespring.domain;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import java.time.LocalDate;
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -7,18 +10,24 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.validation.annotation.Validated;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Document
+@Validated
 public class MovieInfo {
 
   @Id
-  private String movieID;
-
+  private String movieInfoId;
+  @NotBlank(message = "movieInfo.name must be present")
   private String name;
+  @NotNull
+  @Positive(message = "movieInfo.year must be a Positive Value")
   private Integer year;
-  private List<String> cast;
-  private LocalDate release_Date;
+
+  @NotNull
+  private List<@NotBlank(message = "movieInfo.cast must be present") String> cast;
+  private LocalDate release_date;
 }

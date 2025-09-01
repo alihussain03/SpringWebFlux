@@ -1,0 +1,42 @@
+# application.yml (common/default config)
+spring:
+  application:
+    name: myapp
+  data:
+    mongodb:
+      port: 27017  # default port, common for all envs
+  profiles:
+    active: local   # default profile, can be overridden via env or CLI
+
+---
+# Local environment
+spring:
+  config:
+    activate:
+      on-profile: local
+  data:
+    mongodb:
+      host: localhost
+      database: myapp_local
+
+---
+# Non-production environment (staging/test)
+spring:
+  config:
+    activate:
+      on-profile: non-prod
+  data:
+    mongodb:
+      host: staging-db-host
+      database: myapp_staging
+
+---
+# Production environment
+spring:
+  config:
+    activate:
+      on-profile: prod
+  data:
+    mongodb:
+      host: prod-db-host
+      database: myapp_prod
