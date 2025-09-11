@@ -18,6 +18,7 @@
   <modules>
     <module>movies-info-service</module>
     <module>Reactor-Practice</module>
+    <module>movies-review-service</module>
   </modules>
 
 </project>
